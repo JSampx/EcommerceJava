@@ -14,13 +14,14 @@ public class Carrinho {
     // Método para adicionar um produto ao carrinho
     public void adicionarProduto(Produto produto, int quantidade) {
         // Verifica se há estoque disponível
-        if (produto.diminuirEstoque(quantidade)) {
+        if (produto.getEstoque()>=quantidade) {
             this.qntItens += quantidade;
             this.total += produto.getPreco() * quantidade;
             this.listaProdutos.add(produto);
+            produto.diminuirEstoque(this.qntItens);
             System.out.println(quantidade + "x " + produto.getNome() + " foi(ram) adicionado(s) ao carrinho.");
         } else {
-            System.out.println("Estoque insuficiente para o produto " + produto.getNome() + ".");
+            System.out.println("\nEstoque insuficiente para o produto " + produto.getNome() + ".\n");
         }
     }
 
